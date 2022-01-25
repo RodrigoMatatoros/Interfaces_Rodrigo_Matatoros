@@ -1,0 +1,54 @@
+<html>
+    <head>
+        <title>Ejercicio1 animaciones</title>
+        <style>
+            .contenido
+            {
+                border-style: 2px solid black;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="contenido">
+            <h1>Pincha en cualquiera de los textos</h1>
+            <script>
+
+                var contenido = document.getElementById('contenido');
+               
+                var orden = ["Primero","Segundo","Tercero","Cuarto"];
+                var colores = ["#ECFF00","#AA00FF","#FF8000","#5DFF00"];
+
+                function crearDiv()
+                { 
+                    var contador = 0;
+                    var intervalo = setInterval(()=>{
+                        var ele = document.createElement('div');
+                        contenido.appendChild(ele);
+                        ele.innerHTML = orden[contador];
+                        ele.className= "div";
+                        ele.style.backgroundColor = colores[contador];
+                        ele.addEventListener('click', borrar);
+                        contador++;
+
+                        if(contador==4
+                        ){
+                            clearInterval(intervalo);
+                        }
+
+                        function borrar(){
+                            clearInterval(intervalo);
+                            var lista = document.querySelectorAll('.div');
+
+                            for(var i=0; i<lista.length; i++){
+                                contenido.removeChild(lista[i]);
+                            }
+                            crearDiv();
+                        }
+                        
+                    }, 1000);
+                }
+                document.addEventListener('DOMContentLoaded', crearDiv);
+            </script>
+        </div>
+    </body>
+</html>
